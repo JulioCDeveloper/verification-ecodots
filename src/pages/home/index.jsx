@@ -1,14 +1,15 @@
-import { Box, Container, Divider, Grid, Paper, Typography } from "@mui/material"
+import { Box, Container, Grid, Paper, Typography } from "@mui/material"
 import logo from '../../assets/logo-nova.svg'
-
 
 const Home = () => {
     return (
-        <Container sx={{ marginTop: 10, justifyContent: "center", display: "flex" }} >
-            <Container  sx={{ justifyContent: "center", display: "flex"}}>
-                <Paper sx={{ width: "90%" }}>
-                    <Box padding={2} >
 
+        <><Container sx={{ marginTop: 10, justifyContent: "center", display: "flex", flexDirection: ["column", "row"] }}>
+            <Container sx={{ justifyContent: "center", display: "flex" }}>
+                <Paper sx={{ width: "100%", ['@media (min-width:780px)']: { width: '90%' } }}>
+                    <Box padding={2}>
+
+                        {/* ... Restante do código ... */}
                         <Box display="flex" justifyContent="center">
                             <Box display="flex" justifyContent="center" flexDirection="column">
                                 <Box display="flex" justifyContent="center">
@@ -30,121 +31,99 @@ const Home = () => {
                             </Box>
                         </Box>
 
-
                     </Box>
-                    <Box padding={2} marginLeft={10}>
-                        <Grid container spacing={67}>
-                            <Grid item>
+                    <Box padding={2} marginLeft={[0, 10]}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Nº de usuário</Typography>
                                 <Typography>13</Typography>
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Nº de certificado</Typography>
                                 <Typography>289762554289289762552</Typography>
                             </Grid>
 
                         </Grid>
                     </Box>
-
-                    <Box display="flex" justifyContent="center">
-                        <Divider sx={{ width: "90%", background: "black" }} />
-                    </Box>
-
-                    <Box padding={2} marginLeft={10}>
-                        <Grid container spacing={64}>
-                            <Grid item>
+                    <Box padding={2} marginLeft={[0, 10]}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Nome de usuário</Typography>
                                 <Typography>13</Typography>
                             </Grid>
-                            <Grid item>
-                                <Typography fontWeight={600}>Nº do Lot</Typography>
-                                <Typography>13</Typography>
+                            <Grid item xs={12} sm={6}>
+                                <Typography fontWeight={600}>Nº de lot</Typography>
+                                <Typography>289762554289289762552</Typography>
                             </Grid>
 
                         </Grid>
                     </Box>
-                    <Box display="flex" justifyContent="center">
-                        <Divider sx={{ width: "90%", background: "black" }} />
-                    </Box>
-
-                    <Box padding={2} marginLeft={10}>
-                        <Grid container spacing={70}>
-                            <Grid item>
-                                <Typography fontWeight={600}>Nº lot filhos</Typography>
+                    <Box padding={2} marginLeft={[0, 10]}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
+                                <Typography fontWeight={600}>Nº de lotFilhos</Typography>
                                 <Typography>13</Typography>
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Valor</Typography>
-                                <Typography>R$2037,00</Typography>
+                                <Typography>R$3982,00</Typography>
                             </Grid>
 
                         </Grid>
                     </Box>
-                    <Box display="flex" justifyContent="center">
-                        <Divider sx={{ width: "90%", background: "black" }} />
-                    </Box>
-
-                    <Box padding={2} marginLeft={10}>
-                        <Grid container spacing={70}>
-                            <Grid item>
+                    <Box padding={2} marginLeft={[0, 10]}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Categoria</Typography>
-                                <Typography>Papel</Typography>
+                                <Typography>13</Typography>
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Tipo</Typography>
-                                <Typography>Papelão</Typography>
+                                <Typography>289762554289289762552</Typography>
                             </Grid>
 
                         </Grid>
                     </Box>
-                    <Box display="flex" justifyContent="center">
-                        <Divider sx={{ width: "90%", background: "black" }} />
-                    </Box>
-
-                    <Box padding={2} marginLeft={10}>
-                        <Grid container spacing={70}>
-                            <Grid item>
+                    <Box padding={2} marginLeft={[0, 10]}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Condição</Typography>
                                 <Typography>Fardo</Typography>
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Peso</Typography>
                                 <Typography>600kg</Typography>
                             </Grid>
 
                         </Grid>
                     </Box>
-                    <Box display="flex" justifyContent="center">
-                        <Divider sx={{ width: "90%", background: "black" }} />
-                    </Box>
 
-                    <Box padding={2} marginLeft={10}>
-                        <Grid container spacing={70}>
-                            <Grid item>
+                    {/* ... Restante do código ... */}
+
+                    <Box padding={2} marginLeft={[0, 10]}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Rede utilizada</Typography>
-                               
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12} sm={6}>
                                 <Typography>Polygon</Typography>
                             </Grid>
 
                         </Grid>
-                        <Grid container spacing={60}>
-                            <Grid item>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Hash da blockchain</Typography>
-                               
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12} sm={6}>
                                 <Typography>dghdvfgddi782652dbgdgtg</Typography>
                             </Grid>
 
                         </Grid>
-                        <Grid container spacing={65}>
-                            <Grid item>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Hash do arquivo</Typography>
-                               
                             </Grid>
-                            <Grid item>
+                            <Grid item xs={12} sm={6}>
                                 <Typography>idudwd982766278i2u6t</Typography>
                             </Grid>
 
@@ -154,7 +133,12 @@ const Home = () => {
                 </Paper>
             </Container>
         </Container>
+      </>
     )
 }
+
+{/* <Box display="flex" justifyContent="center">
+<Divider sx={{ width: "90%", background: "black" }} />
+</Box> */}
 
 export default Home
