@@ -1,7 +1,34 @@
-import { Box, Container, Grid, Paper, Typography } from "@mui/material"
+import { Box, CircularProgress, Container, Grid, Paper, Typography } from "@mui/material"
 import logo from '../../assets/logo-nova.svg'
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const Home = () => {
+    const [dataVerification, setDataVerification] = useState(null);
+
+    const { lotId, verificationCode } = useParams();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`https://supplychain.ecodots.com.br/v1/lot/${lotId}/verify?verificationCode=${verificationCode}`);
+                setDataVerification(response.data);
+                console.log('dados down ', response.data);
+            } catch (error) {
+                console.error('Erro ao buscar dados: ', error);
+                // Trate o erro conforme necessário em sua aplicação
+            }
+        };
+        fetchData();
+    }, [lotId, verificationCode]);
+
+    if (!dataVerification) {
+        return <div><CircularProgress /></div>;
+    }
+
+    // rest of your component
+
     return (
 
         <><Container sx={{ marginTop: 10, justifyContent: "center", display: "flex", flexDirection: ["column", "row"] }}>
@@ -26,7 +53,7 @@ const Home = () => {
                                 </Box>
                                 <Box display="flex" justifyContent="center" gap={2} marginTop={2}>
                                     <Typography fontSize={28} fontWeight={600}>Status:</Typography>
-                                    <Typography fontSize={28} color={"green"}>Verificado</Typography>
+                                    <Typography fontSize={28} color={"green"}>{dataVerification.status}</Typography>
                                 </Box>
                             </Box>
                         </Box>
@@ -36,11 +63,11 @@ const Home = () => {
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Nº de usuário</Typography>
-                                <Typography>13</Typography>
+                                <Typography>{dataVerification.lot.ownerId}</Typography>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Nº de certificado</Typography>
-                                <Typography>289762554289289762552</Typography>
+                                <Typography>{dataVerification.lot.lotId}</Typography>
                             </Grid>
 
                         </Grid>
@@ -49,11 +76,11 @@ const Home = () => {
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Nome de usuário</Typography>
-                                <Typography>13</Typography>
+                                <Typography>{dataVerification.lot.ownerName}</Typography>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Nº de lot</Typography>
-                                <Typography>289762554289289762552</Typography>
+                                <Typography>{dataVerification.lot.lotId}</Typography>
                             </Grid>
 
                         </Grid>
@@ -62,11 +89,11 @@ const Home = () => {
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Nº de lotFilhos</Typography>
-                                <Typography>13</Typography>
+                                <Typography>{dataVerification.lot.childrenLotIds}</Typography>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Valor</Typography>
-                                <Typography>R$3982,00</Typography>
+                                <Typography>{dataVerification.lot.price}</Typography>
                             </Grid>
 
                         </Grid>
@@ -75,11 +102,11 @@ const Home = () => {
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Categoria</Typography>
-                                <Typography>13</Typography>
+                                <Typography>{dataVerification.lot.category}</Typography>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Tipo</Typography>
-                                <Typography>289762554289289762552</Typography>
+                                <Typography>{dataVerification.lot.wasteType}</Typography>
                             </Grid>
 
                         </Grid>
@@ -92,7 +119,7 @@ const Home = () => {
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Peso</Typography>
-                                <Typography>600kg</Typography>
+                                <Typography>{dataVerification.lot.weight}</Typography>
                             </Grid>
 
                         </Grid>
@@ -119,21 +146,13 @@ const Home = () => {
                             </Grid>
 
                         </Grid>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6}>
-                                <Typography fontWeight={600}>Hash do arquivo</Typography>
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <Typography>idudwd982766278i2u6t</Typography>
-                            </Grid>
-
-                        </Grid>
+                      
                     </Box>
 
                 </Paper>
             </Container>
         </Container>
-      </>
+        </>
     )
 }
 

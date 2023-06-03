@@ -6,7 +6,7 @@ const RoutesPage = () => {
   // const { lotId, typeUser } = useParams();
   return (
     <Routes>
-        <Route path='/verification/:lotId/:typeUser' index element={<Home />} />
+        <Route path="/lot/:lotId/verify/:verificationCode" index element={<Home />} />
     </Routes>
   )
 }
