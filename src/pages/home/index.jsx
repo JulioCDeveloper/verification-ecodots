@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import { Box, CircularProgress, Container, Grid, Paper, Typography } from "@mui/material"
 import logo from '../../assets/logo-nova.svg'
 import { useState, useEffect } from "react";
@@ -6,7 +7,8 @@ import { useParams } from "react-router-dom";
 
 const Home = () => {
     const [dataVerification, setDataVerification] = useState(null);
-
+    const [dataHash, setDataHash] = useState(null);
+    console.log(dataHash)
     const { lotId, verificationCode } = useParams();
 
     useEffect(() => {
@@ -15,6 +17,20 @@ const Home = () => {
                 const response = await axios.get(`https://supplychain.ecodots.com.br/v1/lot/${lotId}/verify?verificationCode=${verificationCode}`);
                 setDataVerification(response.data);
                 console.log('dados down ', response.data);
+            } catch (error) {
+                console.error('Erro ao buscar dados: ', error);
+                // Trate o erro conforme necessário em sua aplicação
+            }
+        };
+        fetchData();
+    }, [lotId, verificationCode]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`https://supplychain.ecodots.com.br/v1/lot/${lotId}/transfer-history`);
+                setDataHash(response.data);
+                console.log('dados hash ', response.data);
             } catch (error) {
                 console.error('Erro ao buscar dados: ', error);
                 // Trate o erro conforme necessário em sua aplicação
@@ -43,18 +59,6 @@ const Home = () => {
                                     <img width={260} src={logo} alt="Logo" />
                                 </Box>
 
-                            </Box>
-                        </Box>
-
-                        <Box display="flex" justifyContent="center">
-                            <Box display="flex" justifyContent="center" flexDirection="column" marginTop={6}>
-                                <Box display="flex" justifyContent="center">
-                                    <img width={100} src="https://cdn-icons-png.flaticon.com/512/5610/5610944.png" alt="Logo" />
-                                </Box>
-                                <Box display="flex" justifyContent="center" gap={2} marginTop={2}>
-                                    <Typography fontSize={28} fontWeight={600}>Status:</Typography>
-                                    <Typography fontSize={28} color={"green"}>{dataVerification.status}</Typography>
-                                </Box>
                             </Box>
                         </Box>
 
@@ -93,9 +97,9 @@ const Home = () => {
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Valor</Typography>
-                                <Typography>{dataVerification.lot.price}</Typography>
+                                <Typography>{parseFloat(dataVerification.lot.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                </Typography>
                             </Grid>
-
                         </Grid>
                     </Box>
                     <Box padding={2} marginLeft={[0, 10]}>
@@ -141,12 +145,20 @@ const Home = () => {
                             <Grid item xs={12} sm={6}>
                                 <Typography fontWeight={600}>Hash da blockchain</Typography>
                             </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <Typography>dghdvfgddi782652dbgdgtg</Typography>
-                            </Grid>
+
+                            {dataHash && dataHash.results && dataHash.results.map((item, index) => (
+                                // Seu código aqui
+                                <Grid item xs={12} sm={3}>
+
+                                    <Typography key={index} style={{ wordBreak: 'break-all' }}>
+                                        {item.transaction}
+                                    </Typography>
+                                </Grid>
+                            ))}
+
 
                         </Grid>
-                      
+
                     </Box>
 
                 </Paper>
