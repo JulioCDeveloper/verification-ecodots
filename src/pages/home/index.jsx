@@ -4,6 +4,7 @@ import logo from '../../assets/logo-nova.svg'
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { green } from "@mui/material/colors";
 
 const Home = () => {
     const [dataVerification, setDataVerification] = useState(null);
@@ -45,6 +46,15 @@ const Home = () => {
 
     // rest of your component
 
+    let statusText;
+    if (dataVerification && dataVerification.status) {
+        if (dataVerification.status === 'verified') {
+            statusText = 'Verificado';
+        } else if (dataVerification.status === 'denied') {
+            statusText = 'Não verificado';
+        }
+    }
+
     return (
 
         <><Container sx={{ marginTop: 10, justifyContent: "center", display: "flex", flexDirection: ["column", "row"] }}>
@@ -57,6 +67,24 @@ const Home = () => {
                             <Box display="flex" justifyContent="center" flexDirection="column">
                                 <Box display="flex" justifyContent="center">
                                     <img width={260} src={logo} alt="Logo" />
+                                </Box>
+
+                            </Box>
+                        </Box>
+                        <Box display="flex" justifyContent="center">
+                            <Box display="flex" justifyContent="center" flexDirection="row" gap={1}>
+                                <Box display="flex" justifyContent="center">
+                                    <Typography fontWeight={600} fontSize={24}>Status:</Typography>
+                                </Box>
+                                <Box display="flex" justifyContent="center">
+                              
+                                    <Typography fontWeight={600} fontSize={24} color={'#1DB3A4'}>
+                                        {dataVerification && dataVerification.status
+                                            ? dataVerification.status === 'verified'
+                                                ? 'Verificado'
+                                                : 'Não verificado'
+                                            : 'Status não disponível'}
+                                    </Typography>
                                 </Box>
 
                             </Box>
